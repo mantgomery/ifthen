@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+
+<p>
+  <b>If:</b>
+  Если <%= @item.if %>
+</p>
+
+<p>
+  <b>Then:</b>
+  То <%= @item.then %>
+</p>
+
+
+<%= link_to 'Edit', edit_item_path(@item) %> |
+<%= link_to 'Back', items_path %>

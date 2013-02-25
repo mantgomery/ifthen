@@ -1,0 +1,35 @@
+<div class="twelve columns" xmlns="http://www.w3.org/1999/html">
+  <h2 id="month">
+    <%= link_to "<", date:@date.prev_month %>
+    <%= @date.strftime("%B %Y") %>
+
+    <%= link_to ">", date:@date.next_month %>
+  </h2>
+  <p>
+    <%= link_to 'Новая задача', new_item_path, :class => "button nice small" %>
+  </p>
+</div>
+<div id="payments" class="twelve columns">
+
+
+  <%= calendar @date do |date| %>
+      <%= date.day %>
+      <% if @items_by_date[date] %>
+          <ul>
+            <% @items_by_date[date].each do |item| %>
+                <%= content_tag_for :li, item do %>
+                    <%= content_tag(:span, "Если #{item.if}, То #{item.then}.", :class=>"has-tip", "data-width"=>"210", :title=>"test" ) %>
+                <% end %>
+                <%= javascript_tag do %>
+                    window.item_id = <%= item.id %>
+                <% end %>
+                <div  class="reveal-modal medium"  id="myModal<%= item.id %>" >
+                  <%=render :partial => "one", :locals => {:item=>item} %>
+                </div>
+
+            <% end %>
+          </ul>
+
+      <% end %>
+  <% end %>
+</div>
